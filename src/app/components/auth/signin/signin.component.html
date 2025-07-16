@@ -1,0 +1,53 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="app-icon">
+        <i class="fas fa-bolt"></i>
+      </div>
+      <h2>Welcome Back</h2>
+      <p>Sign in to continue earning</p>
+    </div>
+
+    <div class="auth-form">
+      <div class="form-group">
+        <label><i class="fas fa-phone"></i> Phone Number</label>
+        <div class="input-wrapper">
+          <input
+            type="tel"
+            [(ngModel)]="phoneNumber"
+            placeholder="Enter your phone number"
+            maxlength="10">
+          <i class="fas fa-mobile-alt input-icon"></i>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-lock"></i> Password</label>
+        <div class="input-wrapper">
+          <input
+            type="password"
+            [(ngModel)]="password"
+            placeholder="Enter your password">
+          <i class="fas fa-eye-slash input-icon"></i>
+        </div>
+      </div>
+
+      <button
+        class="auth-btn primary"
+        (click)="signin()"
+        [disabled]="phoneNumber.length !== 10 || password.length < 6">
+        <i class="fas fa-sign-in-alt"></i>
+        Sign In
+      </button>
+
+      <div class="divider">
+        <span>or</span>
+      </div>
+
+      <button class="auth-btn secondary" (click)="goToSignup()">
+        <i class="fas fa-user-plus"></i>
+        Create New Account
+      </button>
+    </div>
+  </div>
+</div>

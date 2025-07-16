@@ -1,0 +1,111 @@
+<div class="page-container">
+  <!-- Header -->
+  <div class="page-header">
+    <button class="back-btn" (click)="goBack()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h2>Recharge Wallet</h2>
+    <div class="header-icon">
+      <i class="fas fa-credit-card"></i>
+    </div>
+  </div>
+
+  <!-- Quick Amount Selection -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-bolt"></i>
+      <h3>Quick Recharge</h3>
+    </div>
+    <div class="amount-grid">
+      <div
+        class="amount-card"
+        *ngFor="let amount of quickAmounts"
+        [class.selected]="selectedAmount === amount"
+        (click)="selectAmount(amount)">
+        <div class="amount-value">₹{{amount}}</div>
+        <div class="amount-bonus" *ngIf="amount >= 1000">+₹{{amount * 0.05}} Bonus</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Amount -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-edit"></i>
+      <h3>Custom Amount</h3>
+    </div>
+    <div class="custom-amount">
+      <div class="input-wrapper">
+        <span class="currency">₹</span>
+        <input
+          type="number"
+          [(ngModel)]="customAmount"
+          (input)="onCustomAmountChange()"
+          placeholder="Enter amount"
+          class="amount-input">
+      </div>
+      <p class="amount-note">Minimum recharge: ₹100</p>
+    </div>
+  </div>
+
+  <!-- Payment Methods -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-payment"></i>
+      <h3>Payment Method</h3>
+    </div>
+    <div class="payment-methods">
+      <div
+        class="payment-card"
+        *ngFor="let method of paymentMethods"
+        [class.selected]="selectedMethod === method.id"
+        (click)="selectPaymentMethod(method.id)">
+        <div class="payment-icon">
+          <i [class]="method.icon"></i>
+        </div>
+        <div class="payment-info">
+          <div class="payment-name">{{method.name}}</div>
+          <div class="payment-tag" *ngIf="method.popular">Popular</div>
+        </div>
+        <div class="payment-radio">
+          <i class="fas fa-check-circle" *ngIf="selectedMethod === method.id"></i>
+          <i class="far fa-circle" *ngIf="selectedMethod !== method.id"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="section" *ngIf="selectedAmount > 0">
+    <div class="summary-card">
+      <div class="summary-row">
+        <span>Recharge Amount</span>
+        <span class="amount">₹{{selectedAmount}}</span>
+      </div>
+      <div class="summary-row" *ngIf="selectedAmount >= 1000">
+        <span>Bonus Amount</span>
+        <span class="bonus">+₹{{selectedAmount * 0.05}}</span>
+      </div>
+      <div class="summary-divider"></div>
+      <div class="summary-row total">
+        <span>Total Credit</span>
+        <span class="amount">₹{{selectedAmount + (selectedAmount >= 1000 ? selectedAmount * 0.05 : 0)}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Proceed Button -->
+  <div class="proceed-section">
+    <button
+      class="proceed-btn"
+      [disabled]="!selectedAmount || !selectedMethod"
+      (click)="proceedToPayment()">
+      <i class="fas fa-lock"></i>
+      Proceed to Pay ₹{{selectedAmount || 0}}
+    </button>
+    <p class="security-note">
+      <i class="fas fa-shield-alt"></i>
+      Your payment is secured with 256-bit SSL encryption
+    </p>
+  </div>
+</div>

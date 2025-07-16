@@ -1,0 +1,134 @@
+<div class="page-container">
+  <!-- Header -->
+  <div class="page-header">
+    <button class="back-btn" (click)="goBack()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h2>Withdrawal</h2>
+    <div class="header-icon">
+      <i class="fas fa-money-bill-wave"></i>
+    </div>
+  </div>
+
+  <!-- Balance Info -->
+  <div class="balance-info">
+    <div class="balance-card">
+      <div class="balance-header">
+        <i class="fas fa-wallet"></i>
+        <span>Available Balance</span>
+      </div>
+      <div class="balance-amount">₹{{availableBalance}}</div>
+      <div class="balance-note">Minimum withdrawal: ₹{{minimumWithdrawal}}</div>
+    </div>
+  </div>
+
+  <!-- Withdrawal Form -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-edit"></i>
+      <h3>Withdrawal Amount</h3>
+    </div>
+    <div class="amount-input-section">
+      <div class="input-wrapper">
+        <span class="currency">₹</span>
+        <input
+          type="number"
+          [(ngModel)]="withdrawalAmount"
+          placeholder="Enter amount"
+          class="amount-input">
+      </div>
+      <div class="quick-amounts">
+        <button class="quick-btn" (click)="withdrawalAmount = '500'">₹500</button>
+        <button class="quick-btn" (click)="withdrawalAmount = '1000'">₹1000</button>
+        <button class="quick-btn" (click)="withdrawalAmount = '2000'">₹2000</button>
+        <button class="quick-btn" (click)="withdrawalAmount = availableBalance.toString()">All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Withdrawal Methods -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-credit-card"></i>
+      <h3>Withdrawal Method</h3>
+    </div>
+    <div class="withdrawal-methods">
+      <div
+        class="method-card"
+        *ngFor="let method of withdrawalMethods"
+        [class.selected]="selectedMethod === method.id"
+        (click)="selectMethod(method.id)">
+        <div class="method-icon">
+          <i [class]="method.icon"></i>
+        </div>
+        <div class="method-info">
+          <div class="method-name">{{method.name}}</div>
+          <div class="method-fee">Fee: ₹{{method.fee}}</div>
+        </div>
+        <div class="method-radio">
+          <i class="fas fa-check-circle" *ngIf="selectedMethod === method.id"></i>
+          <i class="far fa-circle" *ngIf="selectedMethod !== method.id"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="section" *ngIf="withdrawalAmount && selectedMethod">
+    <div class="summary-card">
+      <div class="summary-row">
+        <span>Withdrawal Amount</span>
+        <span class="amount">₹{{withdrawalAmount}}</span>
+      </div>
+      <div class="summary-row" *ngIf="getMethodFee() > 0">
+        <span>Processing Fee</span>
+        <span class="fee">-₹{{getMethodFee()}}</span>
+      </div>
+      <div class="summary-divider"></div>
+      <div class="summary-row total">
+        <span>You'll Receive</span>
+        <span class="amount">₹{{getFinalAmount()}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Withdrawals -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-history"></i>
+      <h3>Recent Withdrawals</h3>
+    </div>
+    <div class="withdrawal-history">
+      <div class="history-item" *ngFor="let withdrawal of recentWithdrawals">
+        <div class="history-icon">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        <div class="history-info">
+          <div class="history-amount">₹{{withdrawal.amount}}</div>
+          <div class="history-details">{{withdrawal.method}} • {{withdrawal.date}}</div>
+        </div>
+        <div class="history-status" [class]="withdrawal.status">
+          <span class="status-text">{{withdrawal.status | titlecase}}</span>
+          <i class="fas fa-check-circle" *ngIf="withdrawal.status === 'completed'"></i>
+          <i class="fas fa-clock" *ngIf="withdrawal.status === 'pending'"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process Button -->
+  <div class="proceed-section">
+    <button
+      class="proceed-btn"
+      [disabled]="!withdrawalAmount || !selectedMethod || parseIntValue(withdrawalAmount) < minimumWithdrawal"
+
+      (click)="processWithdrawal()">
+      <i class="fas fa-paper-plane"></i>
+      Request Withdrawal
+    </button>
+    <p class="processing-note">
+      <i class="fas fa-info-circle"></i>
+      Withdrawals are processed within 24-48 hours
+    </p>
+  </div>
+</div>

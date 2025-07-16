@@ -1,0 +1,254 @@
+<div class="home-container">
+  <!-- Header -->
+  <div class="header">
+    <div class="user-info">
+      <div class="app-icon">
+        <i class="fas fa-bolt"></i>
+      </div>
+      <div class="user-details">
+        <h3>{{userName}}</h3>
+        <p>{{getHiddenPhone()}}</p>
+      </div>
+    </div>
+    <div class="notification-icon">
+      <i class="fas fa-bell"></i>
+      <span class="notification-badge">3</span>
+    </div>
+  </div>
+
+  <!-- Notification Banner -->
+  <div class="notification-banner">
+    <div class="banner-content">
+      <div class="banner-image">
+        <img src="https://images.pexels.com/photos/3483098/pexels-photo-3483098.jpeg?auto=compress&cs=tinysrgb&w=100" alt="User">
+      </div>
+      <div class="banner-text">
+        <div class="banner-title">
+          <i class="fas fa-check-circle"></i>
+          Congratulations! Rajesh Kumar
+        </div>
+        <div class="banner-subtitle">Successfully withdrew ₹2,500 today</div>
+      </div>
+      <div class="banner-amount">₹2,500</div>
+    </div>
+  </div>
+
+  <!-- Balance Section -->
+  <div class="balance-section">
+    <div class="balance-container">
+      <div class="balance-card main-balance">
+        <div class="balance-header">
+          <i class="fas fa-wallet"></i>
+          <span>Your Balance</span>
+        </div>
+        <div class="balance-amount">₹{{balance}}</div>
+        <div class="balance-change">
+          <i class="fas fa-arrow-up"></i>
+          +₹0 today
+        </div>
+      </div>
+
+      <div class="income-cards">
+        <div class="balance-card income-card">
+          <div class="card-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="card-info">
+            <div class="card-label">Total Income</div>
+            <div class="card-value">₹{{totalIncome}}</div>
+          </div>
+        </div>
+
+        <div class="balance-card income-card">
+          <div class="card-icon">
+            <i class="fas fa-coins"></i>
+          </div>
+          <div class="card-info">
+            <div class="card-label">Today's Earning</div>
+            <div class="card-value">₹0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-section">
+    <div class="action-buttons">
+      <div class="action-btn" (click)="navigateToRecharge()">
+        <div class="btn-icon recharge">
+          <i class="fas fa-credit-card"></i>
+        </div>
+        <span>Recharge</span>
+      </div>
+      <div class="action-btn" (click)="navigateToWithdrawal()">
+        <div class="btn-icon withdrawal">
+          <i class="fas fa-money-bill-wave"></i>
+        </div>
+        <span>Withdrawal</span>
+      </div>
+      <div class="action-btn" (click)="navigateToTeam()">
+        <div class="btn-icon team">
+          <i class="fas fa-users"></i>
+        </div>
+        <span>Team</span>
+      </div>
+      <div class="action-btn" (click)="navigateToOrders()">
+        <div class="btn-icon orders">
+          <i class="fas fa-clipboard-list"></i>
+        </div>
+        <span>Orders</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Investment Plans -->
+  <div class="plans-section">
+    <div class="plans-header">
+      <div class="section-title">
+        <i class="fas fa-rocket"></i>
+        <h3>Investment Plans</h3>
+      </div>
+      <div class="plan-toggle">
+        <button
+          class="toggle-btn"
+          [class.active]="activePlanType === 'daily'"
+          (click)="switchPlanType('daily')">
+          <i class="fas fa-calendar-day"></i>
+          Daily Plans
+        </button>
+        <button
+          class="toggle-btn"
+          [class.active]="activePlanType === 'advanced'"
+          (click)="switchPlanType('advanced')">
+          <i class="fas fa-star"></i>
+          Advanced Plans
+        </button>
+      </div>
+    </div>
+
+    <div class="plans-grid">
+      <div class="plan-card" *ngFor="let plan of getCurrentPlans()" [class.active]="plan.isActive">
+        <div class="plan-header">
+          <h4>{{plan.title}}</h4>
+          <div class="plan-badge" *ngIf="plan.isActive">
+            <i class="fas fa-check-circle"></i>
+            Active
+          </div>
+        </div>
+        <div class="plan-image">
+          <img [src]="plan.image" [alt]="plan.title">
+          <div class="image-overlay">
+            <i class="fas fa-coins"></i>
+          </div>
+        </div>
+        <div class="plan-details">
+          <div class="plan-info">
+            <div class="info-item">
+              <i class="fas fa-hand-holding-usd"></i>
+              <span>Investment: ₹{{plan.investment}}</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-calendar-alt"></i>
+              <span>Daily Income: ₹{{plan.dailyIncome}}</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-clock"></i>
+              <span>Duration: {{plan.days}} days</span>
+            </div>
+            <div class="info-item total">
+              <i class="fas fa-trophy"></i>
+              <span>Total Return: ₹{{plan.total}}</span>
+            </div>
+          </div>
+          <button
+            class="invest-btn"
+            [disabled]="!plan.canPurchase"
+            (click)="investInPlan(plan)">
+            <i class="fas fa-{{plan.canPurchase ? 'rocket' : 'lock'}}"></i>
+            {{plan.canPurchase ? 'Invest Now' : 'Locked'}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Telegram Popup -->
+<div class="telegram-popup" *ngIf="showTelegramPopup" (click)="closeTelegramPopup()">
+  <div class="popup-overlay"></div>
+  <div class="popup-content" (click)="$event.stopPropagation()">
+    <div class="popup-header">
+      <div class="telegram-logo">
+        <i class="fab fa-telegram-plane"></i>
+      </div>
+      <h3>Join Our Community</h3>
+      <button class="close-btn" (click)="closeTelegramPopup()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="popup-body">
+      <div class="popup-features">
+        <div class="feature">
+          <i class="fas fa-bell"></i>
+          <span>Get instant updates</span>
+        </div>
+        <div class="feature">
+          <i class="fas fa-gift"></i>
+          <span>Exclusive offers</span>
+        </div>
+        <div class="feature">
+          <i class="fas fa-users"></i>
+          <span>Connect with community</span>
+        </div>
+      </div>
+      <p>Join our official Telegram channel for the latest updates, tips, and exclusive earning opportunities!</p>
+      <div class="popup-buttons">
+        <button class="join-btn" (click)="joinTelegram()">
+          <i class="fab fa-telegram-plane"></i>
+          Join Now
+        </button>
+        <button class="later-btn" (click)="closeTelegramPopup()">
+          <i class="fas fa-clock"></i>
+          Maybe Later
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <div class="nav-item active" (click)="navigateToHome()">
+    <div class="nav-icon">
+      <i class="fas fa-home"></i>
+    </div>
+    <span>Home</span>
+  </div>
+  <div class="nav-item" (click)="navigateToInvest()">
+    <div class="nav-icon">
+      <i class="fas fa-chart-line"></i>
+    </div>
+    <span>Invest</span>
+  </div>
+
+  <!-- Customer Service Center Button -->
+  <div class="customer-service-btn" (click)="openCustomerService()">
+    <div class="service-icon">
+      <i class="fas fa-headset"></i>
+    </div>
+  </div>
+
+  <div class="nav-item" (click)="navigateToInvite()">
+    <div class="nav-icon">
+      <i class="fas fa-user-friends"></i>
+    </div>
+    <span>Invite</span>
+  </div>
+  <div class="nav-item" (click)="navigateToSettings()">
+    <div class="nav-icon">
+      <i class="fas fa-cog"></i>
+    </div>
+    <span>Settings</span>
+  </div>
+</div>

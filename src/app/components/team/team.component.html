@@ -1,0 +1,145 @@
+<div class="page-container">
+  <!-- Header -->
+  <div class="page-header">
+    <button class="back-btn" (click)="goBack()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h2>My Team</h2>
+    <div class="header-icon">
+      <i class="fas fa-users"></i>
+    </div>
+  </div>
+
+  <!-- Team Stats -->
+  <div class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-user-friends"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{totalReferrals}}</div>
+          <div class="stat-label">Total Referrals</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon earnings">
+          <i class="fas fa-coins"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">₹{{totalEarnings}}</div>
+          <div class="stat-label">Total Earnings</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon today">
+          <i class="fas fa-calendar-day"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{todayReferrals}}</div>
+          <div class="stat-label">Today's Referrals</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Referral Code -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-share-alt"></i>
+      <h3>Your Referral Code</h3>
+    </div>
+    <div class="referral-card">
+      <div class="referral-code">
+        <span class="code-text">{{referralCode}}</span>
+        <button class="copy-btn" (click)="copyReferralCode()">
+          <i class="fas fa-copy"></i>
+        </button>
+      </div>
+      <div class="referral-actions">
+        <button class="action-btn primary" (click)="shareReferralLink()">
+          <i class="fas fa-share"></i>
+          Share Link
+        </button>
+        <button class="action-btn secondary" (click)="copyReferralCode()">
+          <i class="fas fa-copy"></i>
+          Copy Code
+        </button>
+      </div>
+      <div class="referral-note">
+        <i class="fas fa-gift"></i>
+        Earn ₹50 for each successful referral!
+      </div>
+    </div>
+  </div>
+
+  <!-- Team Members -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-list"></i>
+      <h3>Team Members</h3>
+    </div>
+    <div class="team-list">
+      <div class="team-member" *ngFor="let member of teamMembers">
+        <div class="member-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="member-info">
+          <div class="member-name">{{member.name}}</div>
+          <div class="member-details">
+            <span class="member-phone">{{member.phone}}</span>
+            <span class="member-date">Joined: {{member.joinDate}}</span>
+          </div>
+        </div>
+        <div class="member-stats">
+          <div class="member-earnings">₹{{member.earnings}}</div>
+          <div class="member-status" [class]="member.status">
+            <i class="fas fa-circle"></i>
+            {{member.status | titlecase}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Referral Benefits -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-star"></i>
+      <h3>Referral Benefits</h3>
+    </div>
+    <div class="benefits-card">
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <i class="fas fa-money-bill-wave"></i>
+        </div>
+        <div class="benefit-text">
+          <div class="benefit-title">Instant Bonus</div>
+          <div class="benefit-desc">Get ₹50 when your friend joins</div>
+        </div>
+      </div>
+
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <i class="fas fa-percentage"></i>
+        </div>
+        <div class="benefit-text">
+          <div class="benefit-title">Commission</div>
+          <div class="benefit-desc">Earn 10% of their daily income</div>
+        </div>
+      </div>
+
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <div class="benefit-text">
+          <div class="benefit-title">Level Bonus</div>
+          <div class="benefit-desc">Extra rewards for team growth</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
