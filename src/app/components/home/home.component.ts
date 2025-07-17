@@ -20,6 +20,10 @@ export class HomeComponent implements OnInit {
   currentNotificationIndex: number = 0;
   isLoading: boolean = true;
   errorMessage: string | null = null;
+  showInvestmentPopup: boolean = false;
+  selectedPlan: any = null;
+  investmentQuantity: number = 1;
+
   notifications = [
     {
       name: 'Rajesh',
@@ -203,7 +207,42 @@ getCurrentPlans() {
   return this.activePlanType === 'daily' ? this.dailyPlans : this.advancedPlans;
 }
   goToInvestmentDetail(plan: any) {
-    this.router.navigate(['/investment-detail'], { state: { plan: plan } });
+    this.selectedPlan = plan;
+    this.investmentQuantity = 1;
+    this.showInvestmentPopup = true;
+  }
+
+  closeInvestmentPopup() {
+    this.showInvestmentPopup = false;
+    this.selectedPlan = null;
+    this.investmentQuantity = 1;
+  }
+
+  increaseQuantity() {
+    this.investmentQuantity++;
+  }
+
+  decreaseQuantity() {
+    if (this.investmentQuantity > 1) {
+      this.investmentQuantity--;
+    }
+  }
+
+  getTotalInvestment() {
+    return this.selectedPlan ? this.selectedPlan.investment * this.investmentQuantity : 0;
+  }
+
+  canAffordInvestment() {
+    return this.balance >= this.getTotalInvestment();
+  }
+
+  confirmInvestment() {
+    if (this.canAffordInvestment()) {
+      alert(`Investment successful!\nPlan: ${this.selectedPlan.title}\nQuantity: ${this.investmentQuantity}\nTotal Investment: ₹${this.getTotalInvestment()}`);
+      this.closeInvestmentPopup();
+    } else {
+      alert('Insufficient balance! Please recharge your wallet.');
+    }
   }
 
   navigateToInvite() {

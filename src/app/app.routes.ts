@@ -8,7 +8,8 @@ import { RechargeComponent } from './components/recharge/recharge.component';
 import { WithdrawalComponent } from './components/withdrawal/withdrawal.component';
 import { TeamComponent } from './components/team/team.component';
 import { OrdersComponent } from './components/orders/orders.component';
-import { InvestmentDetailComponent } from './components/investment-detail/investment-detail.component';
+import { AboutComponent } from './components/about/about.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 export const routes = [
   { path: '', component: SplashComponent },
@@ -19,6 +20,7 @@ export const routes = [
   { path: 'withdrawal', component: WithdrawalComponent },
   { path: 'team', component: TeamComponent },
   { path: 'orders', component: OrdersComponent },
-   { path: 'investment-detail', component: InvestmentDetailComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: '**', redirectTo: '' }
 ];

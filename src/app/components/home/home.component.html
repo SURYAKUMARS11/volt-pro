@@ -169,6 +169,68 @@
   </div>
 </div>
 
+<!-- Investment Popup -->
+<div class="investment-popup" *ngIf="showInvestmentPopup" (click)="closeInvestmentPopup()">
+  <div class="popup-overlay"></div>
+  <div class="popup-content" (click)="$event.stopPropagation()">
+    <div class="popup-header">
+      <h3>{{selectedPlan?.title}}</h3>
+      <button class="close-btn" (click)="closeInvestmentPopup()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="popup-body">
+      <div class="plan-image">
+        <img [src]="selectedPlan?.image" [alt]="selectedPlan?.title">
+      </div>
+      
+      <div class="plan-details">
+        <div class="detail-item">
+          <i class="fas fa-hand-holding-usd"></i>
+          <span>Investment: ₹{{selectedPlan?.investment}}</span>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-calendar-day"></i>
+          <span>Daily Income: ₹{{selectedPlan?.dailyIncome}}</span>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-clock"></i>
+          <span>Duration: {{selectedPlan?.days}} days</span>
+        </div>
+        <div class="detail-item highlight">
+          <i class="fas fa-trophy"></i>
+          <span>Total Return: ₹{{selectedPlan?.total}}</span>
+        </div>
+      </div>
+
+      <div class="quantity-section">
+        <h4>Select Quantity</h4>
+        <div class="quantity-controls">
+          <button class="quantity-btn" (click)="decreaseQuantity()" [disabled]="investmentQuantity <= 1">
+            <i class="fas fa-minus"></i>
+          </button>
+          <span class="quantity-display">{{investmentQuantity}}</span>
+          <button class="quantity-btn" (click)="increaseQuantity()">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+        <p class="quantity-note">Total Investment: ₹{{getTotalInvestment()}}</p>
+      </div>
+
+      <div class="popup-actions">
+        <button class="invest-btn" (click)="confirmInvestment()" [disabled]="!canAffordInvestment()">
+          <i class="fas fa-rocket"></i>
+          Invest ₹{{getTotalInvestment()}}
+        </button>
+        <button class="recharge-btn" *ngIf="!canAffordInvestment()" (click)="navigateToRecharge()">
+          <i class="fas fa-credit-card"></i>
+          Recharge Wallet
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Telegram Popup -->
 <div class="telegram-popup" *ngIf="showTelegramPopup" (click)="closeTelegramPopup()">
   <div class="popup-overlay"></div>
