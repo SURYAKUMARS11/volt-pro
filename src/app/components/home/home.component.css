@@ -1,13 +1,13 @@
 .home-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #f093fb 0%, #f5f7fa 50%, #c3cfe2 100%);
-  padding-bottom: 90px;
+  padding-bottom: 80px;
 }
 
 .header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 25px 20px;
+  padding: 20px;
   border-radius: 0 0 25px 25px;
   display: flex;
   justify-content: space-between;
@@ -90,10 +90,10 @@
 
 /* Enhanced Notification Banner */
 .notification-banner {
-  margin: 20px;
+  margin: 15px 20px;
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   border-radius: 20px;
-  padding: 15px 20px;
+  padding: 12px 18px;
   box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
   animation: slideIn 0.6s ease-out;
   position: relative;
@@ -174,19 +174,19 @@
 
 /* Combined Balance Section */
 .balance-section {
-  padding: 0 20px 25px;
+  padding: 0 20px 20px;
 }
 
 .combined-balance-card {
   background: whitesmoke;
   backdrop-filter: blur(20px);
   border-radius: 20px;
-  padding: 20px;
+  padding: 18px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .balance-item {
@@ -202,15 +202,15 @@
 }
 
 .balance-icon {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1rem;
   flex-shrink: 0;
 }
 
@@ -224,34 +224,34 @@
 }
 
 .balance-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #718096;
   font-weight: 600;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .balance-value {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 800;
   color: #2d3748;
 }
 
 .balance-divider {
   width: 1px;
-  height: 40px;
+  height: 35px;
   background: #e2e8f0;
   flex-shrink: 0;
 }
 
 /* Horizontal Action Section */
 .action-section {
-  padding: 0 20px 25px;
+  padding: 0 20px 18px;
 }
 
 .action-buttons {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
 }
 
 .action-btn {
@@ -259,8 +259,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 15px 8px;
+  gap: 6px;
+  padding: 12px 6px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -270,14 +270,14 @@
 }
 
 .btn-icon {
-  width: 45px;
-  height: 45px;
+  width: 42px;
+  height: 42px;
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
   transition: all 0.3s ease;
 }
@@ -299,7 +299,7 @@
 }
 
 .action-btn span {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #4a5568;
   font-weight: 600;
   text-align: center;
@@ -307,28 +307,28 @@
 
 /* Plans Section */
 .plans-section {
-  padding: 0 20px;
+  padding: 0 20px 15px;
 }
 
 .plans-header {
-  margin-bottom: 25px;
+  margin-bottom: 18px;
 }
 
 .section-title {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
 .section-title i {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: #ff6b9d;
 }
 
 .section-title h3 {
   color: #2d3748;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   margin: 0;
   font-weight: 700;
 }
@@ -338,17 +338,17 @@
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border-radius: 15px;
-  padding: 5px;
-  gap: 5px;
+  padding: 4px;
+  gap: 4px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
 .toggle-btn {
   flex: 1;
-  padding: 12px 20px;
+  padding: 10px 16px;
   border: none;
   border-radius: 12px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -357,7 +357,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .toggle-btn.active {
@@ -373,8 +373,8 @@
 .plans-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+  gap: 15px;
+  margin-top: 15px;
 }
 
 .plan-card {
@@ -398,7 +398,7 @@
 }
 
 .plan-header {
-  padding: 20px;
+  padding: 16px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   display: flex;
@@ -408,24 +408,24 @@
 
 .plan-header h4 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
 }
 
 .plan-badge {
   background: #10b981;
   color: white;
-  padding: 6px 12px;
+  padding: 4px 10px;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
 .plan-image {
-  height: 180px;
+  height: 160px;
   overflow: hidden;
   position: relative;
 }
@@ -443,48 +443,48 @@
 
 .image-overlay {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 40px;
-  height: 40px;
+  top: 12px;
+  right: 12px;
+  width: 35px;
+  height: 35px;
   background: rgba(255, 107, 157, 0.9);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .plan-details {
-  padding: 20px;
+  padding: 16px;
 }
 
 .plan-info {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 0.95rem;
+  gap: 10px;
+  font-size: 0.9rem;
   color: #4a5568;
 }
 
 .info-item i {
-  width: 20px;
+  width: 18px;
   color: #ff6b9d;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .info-item.total {
   color: #10b981;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .info-item.total i {
@@ -493,19 +493,19 @@
 
 .invest-btn {
   width: 100%;
-  padding: 15px;
+  padding: 12px;
   background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
   color: white;
   border: none;
   border-radius: 12px;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
 }
 
@@ -940,7 +940,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 15px 0;
+  padding: 12px 0;
   border-top: 1px solid rgba(226, 232, 240, 0.5);
   box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
   border-radius: 25px 25px 0 0;
@@ -950,7 +950,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8px 15px;
+  padding: 6px 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   color: #a0aec0;
@@ -967,20 +967,20 @@
 }
 
 .nav-icon {
-  font-size: 1.3rem;
-  margin-bottom: 5px;
+  font-size: 1.2rem;
+  margin-bottom: 4px;
 }
 
 .nav-item span {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
 }
 
 /* Customer Service Button */
 .customer-service-btn {
   position: relative;
-  width: 65px;
-  height: 65px;
+  width: 60px;
+  height: 60px;
   background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
   border-radius: 50%;
   display: flex;
@@ -989,7 +989,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
-  margin-top: -25px;
+  margin-top: -20px;
   border: 4px solid rgba(255, 255, 255, 0.9);
 }
 
@@ -999,7 +999,7 @@
 }
 
 .service-icon {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: white;
 }
 
@@ -1029,7 +1029,7 @@
 @media (max-width: 768px) {
   .combined-balance-card {
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
   }
 
   .balance-item {
@@ -1050,46 +1050,46 @@
 }
 @media (max-width: 480px) {
   .header {
-    padding: 20px 15px;
+    padding: 16px 15px;
   }
   
   .notification-banner {
-    margin: 15px;
-    padding: 12px 15px;
+    margin: 12px 15px;
+    padding: 10px 12px;
   }
   
   .banner-content {
-    gap: 12px;
+    gap: 10px;
   }
   
   .banner-image {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
   }
   
   .banner-title {
-    font-size: 0.8rem;
-  }
-  
-  .banner-subtitle {
     font-size: 0.75rem;
   }
   
+  .banner-subtitle {
+    font-size: 0.7rem;
+  }
+  
   .banner-amount {
-    font-size: 1rem;
-    padding: 6px 12px;
+    font-size: 0.9rem;
+    padding: 5px 10px;
   }
   
   .balance-section {
-    padding: 0 15px 20px;
+    padding: 0 15px 16px;
   }
   
   .action-section {
-    padding: 0 15px 20px;
+    padding: 0 15px 16px;
   }
   
   .plans-section {
-    padding: 0 15px;
+    padding: 0 15px 12px;
   }
   
   .popup-content {
@@ -1105,58 +1105,58 @@
   }
   
   .action-buttons {
-    gap: 8px;
+    gap: 6px;
   }
   
   .action-btn {
-    padding: 12px 6px;
+    padding: 10px 5px;
   }
   
   .btn-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
   }
   
   .action-btn span {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 }
 
 /* Zoom Support */
 @media (max-width: 320px) {
   .header {
-    padding: 15px 10px;
+    padding: 12px 10px;
   }
   
   .notification-banner {
     margin: 10px;
-    padding: 10px 12px;
+    padding: 8px 10px;
   }
   
   .balance-section,
   .action-section,
   .plans-section {
-    padding: 0 10px 15px;
+    padding: 0 10px 12px;
   }
   
   .combined-balance-card {
-    padding: 15px;
+    padding: 12px;
   }
   
   .balance-icon {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
   }
   
   .balance-value {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   
   .btn-icon {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
   }
 }
