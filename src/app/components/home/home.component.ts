@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { SupabaseService, UserProfile } from '../../supabase.service';
 
 @Component({
   selector: 'app-home',
@@ -16,8 +17,46 @@ export class HomeComponent implements OnInit {
   totalIncome: number = 0;
   showTelegramPopup: boolean = false;
   activePlanType: string = 'daily';
+  currentNotificationIndex: number = 0;
+  isLoading: boolean = true;
+  errorMessage: string | null = null;
+  notifications = [
+    {
+      name: 'Rajesh',
+      amount: 2500,
+      action: 'withdrawn',
+      image: 'https://images.pexels.com/photos/3483098/pexels-photo-3483098.jpeg?auto=compress&cs=tinysrgb&w=100'
+    },
+    {
+      name: 'Priya',
+      amount: 1500,
+      action: 'earned profit',
+      image: 'https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=100'
+    },
+    {
+      name: 'Amit ',
+      amount: 3000,
+      action: 'invested',
+      image: 'https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=100'
+    }
+  ];
 
-  constructor(private router: Router) {}
+  
+  constructor(
+    // !!! CRITICAL: Ensure 'private' (or 'public') is here !!!
+    private supabaseService: SupabaseService,
+    private router: Router // Inject Router if you're using it for auth redirects
+  ) {
+    // This console log will help immediately confirm if the service is injected
+    console.log('HomeComponent constructor called.');
+    if (!this.supabaseService) {
+      console.error('ERROR: SupabaseService is UNDEFINED immediately after injection in constructor!');
+      // In a real app, you might want to log this to an error tracking service
+    } else {
+      console.log('SUCCESS: SupabaseService is defined in constructor.');
+    }
+  }
+
 
   dailyPlans = [
     {
@@ -69,20 +108,58 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  ngOnInit() {
-    this.userName = localStorage.getItem('userName') || 'User';
-    this.userPhone = localStorage.getItem('userPhone') || '1234567890';
-    this.balance = 0;
-    this.totalIncome = 0;
+ async ngOnInit() {
+    this.balance = 0; // Initialize or fetch from other tables
+    this.totalIncome = 0; // Initialize or fetch from other tables
 
-    // Show telegram popup after a short delay
+    // 1. Get the authenticated user from Supabase Auth
+    const user = await this.supabaseService.getUser();
+
+    if (user) {
+      // User is logged in, now fetch their profile data
+      const userProfile = await this.supabaseService.getUserProfile(user.id);
+
+      if (userProfile) {
+        // Profile found, update component properties
+        this.userName = userProfile.nickname || user.email || 'User'; // Fallback
+        this.userPhone = userProfile.phone_number || 'N/A'; // Fallback
+      } else {
+        // Profile not found in 'profiles' table for this user ID
+        console.warn(`User profile not found in 'profiles' table for user ID: ${user.id}. 
+                     Ensure RLS and profile creation logic is correct.`);
+        this.userName = user.email || 'User'; // Fallback to email from auth.users
+        this.userPhone = 'N/A'; // No profile phone, keep default
+      }
+    } else {
+      // No user logged in
+      console.log('No user logged in. Using default values.');
+      // Optional: Redirect to login page if authentication is required for this page
+      // this.router.navigate(['/login']); 
+    }
+
+    // Your existing component logic
     setTimeout(() => {
       this.showTelegramPopup = true;
     }, 1000);
+
+    this.startNotificationSlider();
+  }
+  startNotificationSlider() {
+    setInterval(() => {
+      this.currentNotificationIndex = (this.currentNotificationIndex + 1) % this.notifications.length;
+    }, 4000);
   }
 
-  getHiddenPhone(): string {
-    return this.userPhone.replace(/(\d{3})\d{4}(\d{3})/, '$1****$2');
+  getCurrentNotification() {
+    return this.notifications[this.currentNotificationIndex];
+  }
+
+ getHiddenPhone(): string {
+    if (this.userPhone && this.userPhone.length > 4) {
+      // Example: show first 2 and last 3 digits like "91*******123"
+      return this.userPhone.slice(0, 6) + '*******' + this.userPhone.slice(-3);
+    }
+    return this.userPhone; // If too short or "N/A", display as is
   }
 
   closeTelegramPopup() {
@@ -93,57 +170,43 @@ export class HomeComponent implements OnInit {
     window.open('https://t.me/voltearning', '_blank');
     this.closeTelegramPopup();
   }
-
-  switchPlanType(type: string) {
-    this.activePlanType = type;
-  }
-
-  investInPlan(plan: any) {
-    if (plan.canPurchase) {
-      alert(`Investing in ${plan.title} plan for ₹${plan.investment}!`);
-    } else {
-      alert('Please complete previous plans first!');
-    }
-  }
-
-  getCurrentPlans() {
-    return this.activePlanType === 'daily' ? this.dailyPlans : this.advancedPlans;
-  }
-
-  // Navigation methods
-  navigateToRecharge() {
+ navigateToRecharge() {
     this.router.navigate(['/recharge']);
   }
-
-  navigateToWithdrawal() {
+   navigateToWithdrawal() {
     this.router.navigate(['/withdrawal']);
   }
-
-  navigateToTeam() {
+navigateToTeam() {
     this.router.navigate(['/team']);
   }
-
   navigateToOrders() {
     this.router.navigate(['/orders']);
   }
-
-  navigateToHome() {
+navigateToHome() {
     this.router.navigate(['/home']);
   }
 
-  navigateToInvest() {
-    this.router.navigate(['/invest']);
-  }
-
-  navigateToInvite() {
-    this.router.navigate(['/invite']);
+  navigateToAbout() {
+    this.router.navigate(['/about']);
   }
 
   navigateToSettings() {
     this.router.navigate(['/settings']);
   }
+  switchPlanType(type: string) {
+    this.activePlanType = type;
+  }
+ openCustomerService() {
+    alert('Customer service coming soon!');
+  }
+getCurrentPlans() {
+  return this.activePlanType === 'daily' ? this.dailyPlans : this.advancedPlans;
+}
+  goToInvestmentDetail(plan: any) {
+    this.router.navigate(['/investment-detail'], { state: { plan: plan } });
+  }
 
-  openCustomerService() {
-    alert('Customer Service - Coming Soon!');
+  navigateToInvite() {
+    this.router.navigate(['/invite']);
   }
 }

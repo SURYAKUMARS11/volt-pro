@@ -88,7 +88,7 @@
   font-weight: 600;
 }
 
-/* Notification Banner */
+/* Enhanced Notification Banner */
 .notification-banner {
   margin: 20px;
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -96,6 +96,8 @@
   padding: 15px 20px;
   box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
   animation: slideIn 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
 }
 
 .banner-content {
@@ -111,16 +113,19 @@
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
 }
 
 .banner-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 .banner-text {
   flex: 1;
+  min-width: 0;
 }
 
 .banner-title {
@@ -143,139 +148,137 @@
   background: rgba(255, 255, 255, 0.2);
   padding: 8px 15px;
   border-radius: 12px;
+  flex-shrink: 0;
 }
 
-/* Balance Section */
+.banner-indicators {
+  position: absolute;
+  bottom: 8px;
+  right: 20px;
+  display: flex;
+  gap: 6px;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.2);
+}
+
+/* Combined Balance Section */
 .balance-section {
   padding: 0 20px 25px;
 }
 
-.balance-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-}
-
-.balance-card {
-  background: rgba(255, 255, 255, 0.95);
+.combined-balance-card {
+  background: whitesmoke;
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.main-balance {
-  text-align: center;
+.balance-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.balance-item.main-balance {
+  flex: 1.2;
+}
+
+.balance-icon {
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  margin-bottom: 10px;
-}
-
-.balance-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  opacity: 0.9;
-}
-
-.balance-amount {
-  font-size: 2.5rem;
-  font-weight: 900;
-  margin-bottom: 10px;
-}
-
-.balance-change {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-
-.income-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-
-.income-card {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 18px;
-}
-
-.card-icon {
-  width: 45px;
-  height: 45px;
-  background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  flex-shrink: 0;
 }
 
-.card-info {
+.balance-icon.income {
+  background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+}
+
+.balance-info {
   flex: 1;
+  min-width: 0;
 }
 
-.card-label {
-  font-size: 0.8rem;
+.balance-label {
+  font-size: 0.75rem;
   color: #718096;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
-.card-value {
-  font-size: 1.3rem;
+.balance-value {
+  font-size: 1.1rem;
   font-weight: 800;
   color: #2d3748;
 }
 
-/* Action Section */
+.balance-divider {
+  width: 1px;
+  height: 40px;
+  background: #e2e8f0;
+  flex-shrink: 0;
+}
+
+/* Horizontal Action Section */
 .action-section {
   padding: 0 20px 25px;
 }
 
 .action-buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .action-btn {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 20px 10px;
+  gap: 8px;
+  padding: 15px 8px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .action-btn:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
 }
 
 .btn-icon {
-  width: 55px;
-  height: 55px;
-  border-radius: 18px;
+  width: 45px;
+  height: 45px;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.4rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  font-size: 1.2rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
   transition: all 0.3s ease;
 }
 
@@ -296,7 +299,7 @@
 }
 
 .action-btn span {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #4a5568;
   font-weight: 600;
   text-align: center;
@@ -784,82 +787,138 @@
   }
 }
 
+/* Mobile Responsive */
 @media (max-width: 768px) {
-  .balance-container {
-    grid-template-columns: 1fr;
+  .combined-balance-card {
+    flex-direction: column;
+    gap: 15px;
   }
 
-  .income-cards {
-    grid-template-columns: 1fr;
+  .balance-item {
+    justify-content: center;
+    text-align: center;
+    flex-direction: row; /* stack icon and info vertically */
+  }
+
+  .balance-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
   }
 
   .plans-grid {
     grid-template-columns: 1fr;
   }
-
-  .action-buttons {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-
-  .plan-toggle {
-    flex-direction: row;
-  }
 }
-
 @media (max-width: 480px) {
   .header {
     padding: 20px 15px;
   }
-
+  
   .notification-banner {
     margin: 15px;
     padding: 12px 15px;
   }
-
+  
   .banner-content {
     gap: 12px;
   }
-
+  
   .banner-image {
     width: 40px;
     height: 40px;
   }
-
+  
   .banner-title {
     font-size: 0.8rem;
   }
-
+  
   .banner-subtitle {
     font-size: 0.75rem;
   }
-
+  
   .banner-amount {
     font-size: 1rem;
     padding: 6px 12px;
   }
-
+  
   .balance-section {
     padding: 0 15px 20px;
   }
-
+  
   .action-section {
     padding: 0 15px 20px;
   }
-
+  
   .plans-section {
     padding: 0 15px;
   }
-
+  
   .popup-content {
     margin: 10px;
   }
-
+  
   .popup-buttons {
     flex-direction: column;
   }
-
+  
   .later-btn {
     flex: none;
+  }
+  
+  .action-buttons {
+    gap: 8px;
+  }
+  
+  .action-btn {
+    padding: 12px 6px;
+  }
+  
+  .btn-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+  
+  .action-btn span {
+    font-size: 0.75rem;
+  }
+}
+
+/* Zoom Support */
+@media (max-width: 320px) {
+  .header {
+    padding: 15px 10px;
+  }
+  
+  .notification-banner {
+    margin: 10px;
+    padding: 10px 12px;
+  }
+  
+  .balance-section,
+  .action-section,
+  .plans-section {
+    padding: 0 10px 15px;
+  }
+  
+  .combined-balance-card {
+    padding: 15px;
+  }
+  
+  .balance-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  
+  .balance-value {
+    font-size: 1rem;
+  }
+  
+  .btn-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
   }
 }

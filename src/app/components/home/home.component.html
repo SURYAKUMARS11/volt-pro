@@ -16,57 +16,52 @@
     </div>
   </div>
 
-  <!-- Notification Banner -->
+  <!-- Sliding Notification Banner -->
   <div class="notification-banner">
     <div class="banner-content">
       <div class="banner-image">
-        <img src="https://images.pexels.com/photos/3483098/pexels-photo-3483098.jpeg?auto=compress&cs=tinysrgb&w=100" alt="User">
+        <img [src]="getCurrentNotification().image" alt="User">
       </div>
       <div class="banner-text">
         <div class="banner-title">
           <i class="fas fa-check-circle"></i>
-          Congratulations! Rajesh Kumar
+          Congratulations! {{getCurrentNotification().name}}
         </div>
-        <div class="banner-subtitle">Successfully withdrew ₹2,500 today</div>
+        <div class="banner-subtitle">Successfully {{getCurrentNotification().action}} ₹{{getCurrentNotification().amount}} today</div>
       </div>
-      <div class="banner-amount">₹2,500</div>
+      <div class="banner-amount">₹{{getCurrentNotification().amount}}</div>
+    </div>
+    <div class="banner-indicators">
+      <span 
+        *ngFor="let notification of notifications; let i = index"
+        class="indicator"
+        [class.active]="i === currentNotificationIndex">
+      </span>
     </div>
   </div>
 
-  <!-- Balance Section -->
+  <!-- Combined Balance Section -->
   <div class="balance-section">
-    <div class="balance-container">
-      <div class="balance-card main-balance">
-        <div class="balance-header">
+    <div class="combined-balance-card">
+      <div class="balance-item main-balance">
+        <div class="balance-icon">
           <i class="fas fa-wallet"></i>
-          <span>Your Balance</span>
         </div>
-        <div class="balance-amount">₹{{balance}}</div>
-        <div class="balance-change">
-          <i class="fas fa-arrow-up"></i>
-          +₹0 today
+        <div class="balance-info">
+          <div class="balance-label">Your Balance</div>
+          <div class="balance-value">₹{{balance}}</div>
         </div>
       </div>
-
-      <div class="income-cards">
-        <div class="balance-card income-card">
-          <div class="card-icon">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <div class="card-info">
-            <div class="card-label">Total Income</div>
-            <div class="card-value">₹{{totalIncome}}</div>
-          </div>
+      
+      <div class="balance-divider"></div>
+      
+      <div class="balance-item">
+        <div class="balance-icon income">
+          <i class="fas fa-chart-line"></i>
         </div>
-
-        <div class="balance-card income-card">
-          <div class="card-icon">
-            <i class="fas fa-coins"></i>
-          </div>
-          <div class="card-info">
-            <div class="card-label">Today's Earning</div>
-            <div class="card-value">₹0</div>
-          </div>
+        <div class="balance-info">
+          <div class="balance-label">Total Income</div>
+          <div class="balance-value">₹{{totalIncome}}</div>
         </div>
       </div>
     </div>
@@ -110,15 +105,15 @@
         <h3>Investment Plans</h3>
       </div>
       <div class="plan-toggle">
-        <button
-          class="toggle-btn"
+        <button 
+          class="toggle-btn" 
           [class.active]="activePlanType === 'daily'"
           (click)="switchPlanType('daily')">
           <i class="fas fa-calendar-day"></i>
           Daily Plans
         </button>
-        <button
-          class="toggle-btn"
+        <button 
+          class="toggle-btn" 
           [class.active]="activePlanType === 'advanced'"
           (click)="switchPlanType('advanced')">
           <i class="fas fa-star"></i>
@@ -161,10 +156,10 @@
               <span>Total Return: ₹{{plan.total}}</span>
             </div>
           </div>
-          <button
-            class="invest-btn"
+          <button 
+            class="invest-btn" 
             [disabled]="!plan.canPurchase"
-            (click)="investInPlan(plan)">
+            (click)="goToInvestmentDetail(plan)">
             <i class="fas fa-{{plan.canPurchase ? 'rocket' : 'lock'}}"></i>
             {{plan.canPurchase ? 'Invest Now' : 'Locked'}}
           </button>
@@ -225,25 +220,25 @@
     </div>
     <span>Home</span>
   </div>
-  <div class="nav-item" (click)="navigateToInvest()">
+  <div class="nav-item" (click)="navigateToInvite()">
     <div class="nav-icon">
-      <i class="fas fa-chart-line"></i>
+      <i class="fas fa-user-friends"></i>
     </div>
-    <span>Invest</span>
+    <span>Invite</span>
   </div>
-
+  
   <!-- Customer Service Center Button -->
   <div class="customer-service-btn" (click)="openCustomerService()">
     <div class="service-icon">
       <i class="fas fa-headset"></i>
     </div>
   </div>
-
-  <div class="nav-item" (click)="navigateToInvite()">
+  
+  <div class="nav-item" (click)="navigateToAbout()">
     <div class="nav-icon">
-      <i class="fas fa-user-friends"></i>
+      <i class="fas fa-info-circle"></i>
     </div>
-    <span>Invite</span>
+    <span>About</span>
   </div>
   <div class="nav-item" (click)="navigateToSettings()">
     <div class="nav-icon">
